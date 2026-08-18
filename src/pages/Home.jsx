@@ -39,6 +39,15 @@ function YieldChart() {
   )
 }
 
+const partners = [
+  { name: 'Syngenta', logo: 'https://logo.clearbit.com/syngenta.com' },
+  { name: 'Bayer', logo: 'https://logo.clearbit.com/bayer.com' },
+  { name: 'BASF', logo: 'https://logo.clearbit.com/basf.com' },
+  { name: 'Corteva', logo: 'https://logo.clearbit.com/corteva.com' },
+  { name: 'UPL', logo: 'https://logo.clearbit.com/upl-ltd.com' },
+  { name: 'FMC', logo: 'https://logo.clearbit.com/fmc.com' },
+]
+
 export default function Home() {
   return (
     <>
@@ -135,6 +144,30 @@ export default function Home() {
             </div>
 
           </div>
+        </div>
+      </section>
+
+      {/* ── Industrial Partners ── */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <Reveal>
+            <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-10">Trusted by Global Industrial Partners</h4>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              {partners.map((partner, i) => (
+                <div 
+                  key={i} 
+                  className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center justify-center p-5 md:p-8 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all duration-300 group cursor-pointer"
+                  title={partner.name}
+                >
+                  <img 
+                    src={partner.logo} 
+                    alt={`${partner.name} Logo`} 
+                    className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-300"
+                  />
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
