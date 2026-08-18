@@ -40,12 +40,12 @@ function YieldChart() {
 }
 
 const partners = [
-  { name: 'Syngenta', logo: 'https://logo.clearbit.com/syngenta.com' },
-  { name: 'Bayer', logo: 'https://logo.clearbit.com/bayer.com' },
-  { name: 'BASF', logo: 'https://logo.clearbit.com/basf.com' },
-  { name: 'Corteva', logo: 'https://logo.clearbit.com/corteva.com' },
-  { name: 'UPL', logo: 'https://logo.clearbit.com/upl-ltd.com' },
-  { name: 'FMC', logo: 'https://logo.clearbit.com/fmc.com' },
+  { name: 'Partner One', logo: 'https://logoipsum.com/api/logo/1' },
+  { name: 'Partner Two', logo: 'https://logoipsum.com/api/logo/2' },
+  { name: 'Partner Three', logo: 'https://logoipsum.com/api/logo/3' },
+  { name: 'Partner Four', logo: 'https://logoipsum.com/api/logo/4' },
+  { name: 'Partner Five', logo: 'https://logoipsum.com/api/logo/5' },
+  { name: 'Partner Six', logo: 'https://logoipsum.com/api/logo/6' },
 ]
 
 export default function Home() {
