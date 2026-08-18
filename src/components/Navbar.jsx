@@ -1,0 +1,93 @@
+import { useState, useEffect } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const location = useLocation()
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20)
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    setMobileMenuOpen(false)
+  }, [location.pathname])
+
+  return (
+    <nav className={`fixed top-0 w-full z-[100] transition-all duration-300 ${
+      scrolled 
+        ? 'bg-white/80 backdrop-blur-lg border-b border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.05)] py-3' 
+        : 'bg-white/50 backdrop-blur-sm border-b border-transparent py-4'
+    }`}>
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+        <Link to="/" className="flex items-center gap-2 group">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-growth-green to-deep-green flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+            <i className="fa-solid fa-leaf text-xl" />
+          </div>
+          <div>
+            <h1 className="font-display font-black text-xl text-deep-green leading-none tracking-tight">EAST WEST</h1>
+            <span className="text-[10px] font-bold text-growth-green uppercase tracking-widest">Group Nepal</span>
+          </div>
+        </Link>
+
+        {/* Desktop Menu */}
+        <div className="hidden md:flex items-center gap-8">
+          <Link to="/" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">Home</Link>
+          <Link to="/about" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">About</Link>
+          
+          <div className="relative group cursor-pointer py-4">
+            <span className="text-sm font-semibold text-charcoal group-hover:text-growth-green transition-colors flex items-center gap-1">
+              Companies <i className="fa-solid fa-chevron-down text-[10px]" />
+            </span>
+            <div className="absolute top-[100%] left-1/2 -translate-x-1/2 w-64 bg-white/90 backdrop-blur-xl border border-white/50 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-2 transform origin-top scale-95 group-hover:scale-100">
+              <Link to="/companies/agro-seed" className="flex items-center gap-3 p-3 rounded-xl hover:bg-growth-green/5 transition-colors">
+                <div className="w-8 h-8 rounded-full bg-growth-green/10 flex items-center justify-center text-growth-green"><i className="fa-solid fa-seedling text-sm" /></div>
+                <div><h6 className="text-sm font-bold text-deep-green">Agro Seed</h6><p className="text-[10px] text-gray-500">Quality tested hybrid seeds</p></div>
+              </Link>
+              <Link to="/companies/agro-chemical" className="flex items-center gap-3 p-3 rounded-xl hover:bg-deep-green/5 transition-colors">
+                <div className="w-8 h-8 rounded-full bg-deep-green/10 flex items-center justify-center text-deep-green"><i className="fa-solid fa-flask text-sm" /></div>
+                <div><h6 className="text-sm font-bold text-deep-green">Agro Chemical</h6><p className="text-[10px] text-gray-500">Crop protection & nutrition</p></div>
+              </Link>
+              <Link to="/companies" className="block w-full text-center py-2 mt-1 text-[11px] font-bold text-growth-green uppercase tracking-wider hover:bg-growth-green/5 rounded-lg transition-colors">Overview</Link>
+            </div>
+          </div>
+
+          <Link to="/products" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">Products</Link>
+          <Link to="/solutions" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">Solutions</Link>
+          <Link to="/news-activities" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">News</Link>
+          <Link to="/gallery" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">Gallery</Link>
+          
+          <Link to="/contact" className="ml-4 px-6 py-2.5 bg-gradient-to-r from-harvest to-harvest-hover text-charcoal font-bold text-sm rounded-full shadow-[0_4px_20px_rgba(234,179,8,0.3)] hover:shadow-[0_4px_25px_rgba(234,179,8,0.4)] hover:-translate-y-0.5 transition-all">
+            <i className="fa-solid fa-handshake mr-1.5" /> Dealer Portal
+          </Link>
+        </div>
+
+        {/* Mobile Toggle */}
+        <button className="md:hidden w-10 h-10 flex items-center justify-center text-deep-green text-xl bg-white/50 backdrop-blur-md rounded-full shadow-sm" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'}`} />
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className={`md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-white/50 shadow-xl transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-[500px] border-t border-gray-100' : 'max-h-0'}`}>
+        <div className="flex flex-col p-6 gap-4">
+          <Link to="/" className="text-base font-bold text-deep-green">Home</Link>
+          <Link to="/about" className="text-base font-bold text-deep-green">About Us</Link>
+          <Link to="/companies" className="text-base font-bold text-deep-green">Our Companies</Link>
+          <div className="pl-4 flex flex-col gap-3 border-l-2 border-growth-green/20">
+            <Link to="/companies/agro-seed" className="text-sm font-semibold text-gray-600"><i className="fa-solid fa-seedling text-growth-green w-5" /> Agro Seed</Link>
+            <Link to="/companies/agro-chemical" className="text-sm font-semibold text-gray-600"><i className="fa-solid fa-flask text-deep-green w-5" /> Agro Chemical</Link>
+          </div>
+          <Link to="/products" className="text-base font-bold text-deep-green">Products</Link>
+          <Link to="/solutions" className="text-base font-bold text-deep-green">Solutions</Link>
+          <Link to="/news-activities" className="text-base font-bold text-deep-green">News</Link>
+          <Link to="/gallery" className="text-base font-bold text-deep-green">Gallery</Link>
+          <Link to="/contact" className="mt-2 py-3 bg-harvest text-charcoal text-center font-bold rounded-xl shadow-lg shadow-harvest/20"><i className="fa-solid fa-handshake mr-2" />Dealer Portal</Link>
+        </div>
+      </div>
+    </nav>
+  )
+}
