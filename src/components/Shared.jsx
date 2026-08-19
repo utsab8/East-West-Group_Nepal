@@ -29,11 +29,11 @@ export function SectionHeader({ overline, title, subtitle, align = 'center' }) {
   )
 }
 
-export function PageHero({ breadcrumbs, title, subtitle }) {
+export function PageHero({ breadcrumbs, title, subtitle, logo }) {
   return (
-    <div className="bg-gradient-to-br from-meadow to-white pt-32 pb-20 relative overflow-hidden">
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-growth-green/10 rounded-full blur-3xl" />
-      <div className="absolute top-20 -left-20 w-72 h-72 bg-harvest/10 rounded-full blur-3xl" />
+    <div className="bg-gradient-to-br from-meadow to-canvas pt-40 pb-24 relative overflow-hidden border-b border-gray-50">
+      <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-growth-green/15 rounded-full blur-[100px]" />
+      <div className="absolute top-20 -left-20 w-[400px] h-[400px] bg-harvest/15 rounded-full blur-[100px]" />
       
       <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
         <motion.div 
@@ -49,6 +49,17 @@ export function PageHero({ breadcrumbs, title, subtitle }) {
             </span>
           ))}
         </motion.div>
+        
+        {logo && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ type: "spring", stiffness: 60, damping: 15 }}
+            className="flex justify-center mb-6"
+          >
+            <img src={logo} alt="Company Logo" className="w-24 h-24 md:w-32 md:h-32 rounded-2xl shadow-lg object-cover bg-white" />
+          </motion.div>
+        )}
         
         <motion.h1 
           initial={{ opacity: 0, scale: 0.95 }}

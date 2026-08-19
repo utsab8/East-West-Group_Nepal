@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Reveal, SectionHeader, PageHero } from '../components/Shared'
 import SEO from '../components/SEO'
+import chemicalLogo from '../chemical.jpeg'
 
 const solutions = [
   { title: 'Crop Protection', badge: 'badge-deep', tag: 'Crop Protection', tagIcon: 'fa-shield-halved', items: [
@@ -50,6 +51,7 @@ export default function AgroChemical() {
         breadcrumbs={[{ href: '#/', label: 'Home' }, { href: '#/companies', label: 'Companies' }, { label: 'Agro Chemical' }]}
         title="East West Agro Chemical"
         subtitle="Proven crop protection, balanced nutrition, and growth regulation solutions for Nepali agriculture."
+        logo={chemicalLogo}
       />
 
       {/* Solutions Grid */}

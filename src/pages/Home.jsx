@@ -1,43 +1,27 @@
 import { Link } from 'react-router-dom'
 import SEO from '../components/SEO'
 import { Reveal, SectionHeader, useCounter } from '../components/Shared'
+import seedLogo from '../seed.jpeg'
+import chemicalLogo from '../chemical.jpeg'
+import { useRef } from 'react'
+import { useInView } from 'framer-motion'
 
 function Counter({ target, suffix = '', label }) {
-  const count = useCounter(target)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+  const count = useCounter(target, 2000, isInView)
+  
   return (
-    <div className="text-center p-6">
-      <div className="font-display font-black text-5xl md:text-6xl text-growth-green mb-2 tracking-tighter">
-        {count}{suffix}
+    <div ref={ref} className="text-center p-6">
+      <div className="font-display font-black text-4xl md:text-5xl text-growth-green mb-2 tracking-tighter">
+        {count === 0 ? '0' : count}{suffix}
       </div>
-      <div className="text-sm font-bold text-gray-500 uppercase tracking-wider">{label}</div>
+      <div className="text-xs font-bold text-gray-500 uppercase tracking-wider">{label}</div>
     </div>
   )
 }
 
-// Data Visualization Component for Bento Box
-function YieldChart() {
-  return (
-    <div className="mt-6 pt-6 border-t border-gray-100">
-      <h6 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Average Yield Increase</h6>
-      <div className="flex items-end gap-3 h-24">
-        <div className="w-1/3 bg-gray-200 rounded-t-lg h-[40%] relative group cursor-pointer">
-          <div className="absolute -top-7 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-charcoal text-white text-[10px] px-2 py-1 rounded">2023</div>
-        </div>
-        <div className="w-1/3 bg-growth-green/40 rounded-t-lg h-[65%] relative group cursor-pointer">
-          <div className="absolute -top-7 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-charcoal text-white text-[10px] px-2 py-1 rounded">2024</div>
-        </div>
-        <div className="w-1/3 bg-growth-green rounded-t-lg h-[95%] relative group cursor-pointer">
-          <div className="absolute -top-7 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-charcoal text-white text-[10px] px-2 py-1 rounded">+40%</div>
-        </div>
-      </div>
-      <div className="flex justify-between text-[10px] text-gray-400 mt-2 font-bold">
-        <span>Traditional</span>
-        <span>Standard Seed</span>
-        <span className="text-growth-green">EW Hybrid</span>
-      </div>
-    </div>
-  )
-}
+
 
 const partners = [
   { name: 'Partner One', logo: 'https://logoipsum.com/api/logo/1' },
@@ -95,54 +79,66 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Bento Grid: Our Companies ── */}
-      <section className="py-24 bg-gray-50 relative overflow-hidden">
+      {/* ── Our Divisions ── */}
+      <section className="py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6">
-          <Reveal><SectionHeader overline="Ecosystem" title="The East West Synergy" subtitle="Two specialized divisions seamlessly integrated into one powerful agricultural platform." /></Reveal>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 max-w-5xl mx-auto auto-rows-fr">
-            
-            {/* Bento Box 1: Agro Seed (Large) */}
-            <div className="md:col-span-2 md:row-span-2 relative bg-white rounded-3xl p-10 overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-shadow group">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-growth-green/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-              <div className="relative z-10 flex flex-col h-full justify-between">
-                <div>
-                  <div className="w-14 h-14 bg-growth-green/10 text-growth-green rounded-2xl flex items-center justify-center text-2xl mb-6"><i className="fa-solid fa-seedling" /></div>
-                  <h3 className="font-display font-bold text-3xl text-deep-green mb-4">East West Agro Seed</h3>
-                  <p className="text-gray-500 leading-relaxed max-w-sm mb-6">Developing climate-resilient, high-yield genetics through intensive R&D and multi-location field trials.</p>
+          <Reveal><SectionHeader overline="Our Ecosystem" title="Two Specialized Companies" subtitle="Providing farmers with comprehensive agricultural solutions through specialized divisions." /></Reveal>
+          <div className="grid md:grid-cols-2 gap-10">
+            <Reveal>
+              <div className="relative rounded-[2.5rem] p-10 bg-gradient-to-br from-meadow to-white border border-growth-green/15 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
+                <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-growth-green/5" />
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center overflow-hidden shadow-sm border border-gray-100">
+                    <img src={seedLogo} alt="Agro Seed Logo" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-xl text-deep-green">East West Agro Seed</h3>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-growth-green bg-growth-green/10 px-2.5 py-0.5 rounded-full mt-1 inline-block">Seeds & Genetics</span>
+                  </div>
                 </div>
-                <div className="w-full">
-                  <YieldChart />
-                  <Link to="/companies/agro-seed" className="mt-8 inline-flex items-center text-sm font-bold text-growth-green group-hover:underline">Explore Seed Division <i className="fa-solid fa-arrow-right ml-2 text-xs" /></Link>
+                <img src="/images/seeds.jpg" alt="Seed varieties and seedlings" className="w-full h-48 object-cover rounded-xl mb-6" />
+                <p className="text-gray-500 leading-relaxed mb-6">Our seed division provides farmers with genetically superior, high-yield seed varieties. Every seed undergoes rigorous germination testing in our certified lab facilities.</p>
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {[{ icon: 'fa-dna', t: 'Seed Genetics R&D' }, { icon: 'fa-microscope', t: 'Germination Lab Standards' }, { icon: 'fa-wheat-awn', t: 'Varietal Trials' }, { icon: 'fa-clipboard-check', t: '85%+ Germination Rate' }].map(f => (
+                    <div key={f.t} className="flex items-center gap-2 bg-growth-green/[0.06] rounded-lg px-3 py-2">
+                      <i className={`fa-solid ${f.icon} text-growth-green text-xs`} />
+                      <span className="text-xs font-semibold text-growth-green">{f.t}</span>
+                    </div>
+                  ))}
                 </div>
+                <Link to="/companies/agro-seed" className="inline-flex items-center gap-2 px-6 py-2.5 bg-growth-green text-white font-semibold text-sm rounded-xl shadow-md hover:bg-growth-green-hover hover:-translate-y-0.5 transition-all">
+                  Explore Agro Seed <i className="fa-solid fa-arrow-right" />
+                </Link>
               </div>
-            </div>
+            </Reveal>
 
-            {/* Bento Box 2: Agro Chemical (Top Right) */}
-            <div className="md:col-span-1 md:row-span-1 bg-deep-green text-white rounded-3xl p-8 relative overflow-hidden shadow-sm hover:shadow-xl transition-shadow group">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--color-growth-green)_0%,_transparent_60%)] opacity-30" />
-              <div className="relative z-10">
-                <i className="fa-solid fa-flask text-3xl text-harvest mb-4 block" />
-                <h4 className="font-display font-bold text-xl mb-2">Agro Chemical</h4>
-                <p className="text-white/70 text-xs leading-relaxed mb-4">Precision crop protection and nutrition formulations.</p>
-                <Link to="/companies/agro-chemical" className="text-xs font-bold text-harvest hover:text-white transition-colors">View Portfolio &rarr;</Link>
+            <Reveal delay={0.15}>
+              <div className="relative rounded-[2.5rem] p-10 bg-gradient-to-br from-meadow to-white border border-growth-green/15 overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.02)] hover:shadow-[0_20px_50px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500">
+                <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-growth-green/5" />
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center overflow-hidden shadow-sm border border-gray-100">
+                    <img src={chemicalLogo} alt="Agro Chemical Logo" className="w-full h-full object-cover" />
+                  </div>
+                  <div>
+                    <h3 className="font-display font-bold text-xl text-deep-green">East West Agro Chemical</h3>
+                    <span className="text-xs font-semibold uppercase tracking-wider text-growth-green bg-growth-green/10 px-2.5 py-0.5 rounded-full mt-1 inline-block">Crop Protection</span>
+                  </div>
+                </div>
+                <img src="/images/lab.jpg" alt="Agricultural chemistry lab" className="w-full h-48 object-cover rounded-xl mb-6" />
+                <p className="text-gray-500 leading-relaxed mb-6">Our chemical division delivers proven crop protection formulations, balanced plant nutrition, and growth regulators. Every product is registered and tested for Nepal's conditions.</p>
+                <div className="grid grid-cols-2 gap-3 mb-6">
+                  {[{ icon: 'fa-shield-halved', t: 'Crop Protection Formulas' }, { icon: 'fa-leaf', t: 'Bio-Stimulants' }, { icon: 'fa-vial', t: 'Soil Micronutrients' }, { icon: 'fa-chart-line', t: 'IPM Protocols' }].map(f => (
+                    <div key={f.t} className="flex items-center gap-2 bg-growth-green/[0.06] rounded-lg px-3 py-2">
+                      <i className={`fa-solid ${f.icon} text-growth-green text-xs`} />
+                      <span className="text-xs font-semibold text-growth-green">{f.t}</span>
+                    </div>
+                  ))}
+                </div>
+                <Link to="/companies/agro-chemical" className="inline-flex items-center gap-2 px-6 py-2.5 bg-growth-green text-white font-semibold text-sm rounded-xl shadow-md hover:bg-growth-green-hover hover:-translate-y-0.5 transition-all">
+                  Explore Agro Chemical <i className="fa-solid fa-arrow-right" />
+                </Link>
               </div>
-            </div>
-
-            {/* Bento Box 3: Quality Control (Bottom Right) */}
-            <div className="md:col-span-1 md:row-span-1 bg-white rounded-3xl p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-shadow">
-              <i className="fa-solid fa-microscope text-3xl text-deep-green/30 mb-4 block" />
-              <h4 className="font-display font-bold text-xl text-deep-green mb-2">ISO Certified Labs</h4>
-              <p className="text-gray-500 text-xs leading-relaxed">State-of-the-art facilities ensuring 99.9% genetic purity.</p>
-              
-              {/* Mini Pipeline UI */}
-              <div className="flex items-center gap-1 mt-4">
-                <div className="h-2 flex-1 bg-growth-green rounded-full relative"><div className="absolute w-2 h-2 rounded-full bg-white border-2 border-growth-green right-0 top-0 scale-[1.5]" /></div>
-                <div className="h-2 flex-1 bg-growth-green/30 rounded-full" />
-                <div className="h-2 flex-1 bg-gray-100 rounded-full" />
-              </div>
-            </div>
-
+            </Reveal>
           </div>
         </div>
       </section>
@@ -152,20 +148,22 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 text-center">
           <Reveal>
             <h4 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-10">Trusted by Global Industrial Partners</h4>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-              {partners.map((partner, i) => (
-                <div 
-                  key={i} 
-                  className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center justify-center p-5 md:p-8 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all duration-300 group cursor-pointer"
-                  title={partner.name}
-                >
-                  <img 
-                    src={partner.logo} 
-                    alt={`${partner.name} Logo`} 
-                    className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-300"
-                  />
-                </div>
-              ))}
+            <div className="relative w-full overflow-hidden py-4 before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-24 before:bg-gradient-to-r before:from-white before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-24 after:bg-gradient-to-l after:from-white after:to-transparent">
+              <div className="animate-marquee py-2">
+                {[...partners, ...partners, ...partners, ...partners].map((partner, i) => (
+                  <div 
+                    key={i} 
+                    className="flex-shrink-0 w-24 h-24 md:w-32 md:h-32 rounded-full bg-white shadow-[0_8px_30px_rgba(0,0,0,0.06)] border border-gray-100 flex items-center justify-center p-5 md:p-8 hover:-translate-y-2 hover:shadow-[0_15px_40px_rgba(0,0,0,0.1)] transition-all duration-300 group cursor-pointer mx-4 md:mx-6"
+                    title={partner.name}
+                  >
+                    <img 
+                      src={partner.logo} 
+                      alt={`${partner.name} Logo`} 
+                      className="w-full h-full object-contain filter grayscale group-hover:grayscale-0 opacity-60 group-hover:opacity-100 transition-all duration-300"
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>
@@ -187,9 +185,9 @@ export default function Home() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-24 bg-deep-green relative overflow-hidden text-center">
+      <section className="py-24 bg-growth-green relative overflow-hidden text-center">
         <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[300px] bg-growth-green/40 blur-[120px] rounded-[100%]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[300px] bg-white/20 blur-[120px] rounded-[100%]" />
         
         <div className="max-w-3xl mx-auto px-6 relative z-10">
           <Reveal>

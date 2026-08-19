@@ -1,19 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;700;900&display=swap');
 @import "tailwindcss";
 @import "@fortawesome/fontawesome-free/css/all.min.css";
 
 /* ── Brand Theme ── */
 @theme {
   --color-canvas: #FFFFFF;
-  --color-deep-green: #14532D;
-  --color-growth-green: #16A34A;
-  --color-growth-green-hover: #15803D;
-  --color-harvest: #EAB308;
-  --color-harvest-hover: #CA8A04;
-  --color-meadow: #F0FDF4;
-  --color-charcoal: #1F2937;
+  --color-deep-green: #0A361A;
+  --color-growth-green: #10B981;
+  --color-growth-green-hover: #059669;
+  --color-harvest: #F59E0B;
+  --color-harvest-hover: #D97706;
+  --color-meadow: #F6FBF7;
+  --color-charcoal: #0F172A;
 
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-display: 'Outfit', sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
 }
 
 /* ── Base ── */
@@ -23,6 +24,7 @@ body {
   font-family: var(--font-body);
   color: var(--color-charcoal);
   -webkit-font-smoothing: antialiased;
+  background-color: var(--color-canvas);
 }
 
 /* ── Scroll Reveal ── */
@@ -43,4 +45,19 @@ body {
 }
 .animate-fade-in-up {
   animation: fadeInUp 0.5s ease forwards;
+}
+
+
+/* ── Marquee ── */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee {
+  display: flex;
+  width: fit-content;
+  animation: marquee 30s linear infinite;
+}
+.animate-marquee:hover {
+  animation-play-state: paused;
 }

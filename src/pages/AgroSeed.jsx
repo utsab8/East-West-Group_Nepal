@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Reveal, SectionHeader, PageHero } from '../components/Shared'
 import SEO from '../components/SEO'
+import seedLogo from '../seed.jpeg'
 
 const categories = [
   { icon: 'fa-pepper-hot', title: 'Hybrid Vegetable Seeds', items: ['Cabbage — Green Emperor, Snow Ball', 'Cauliflower — Snow White, Early Queen', 'Tomato — Srijana, Manisha', 'Chillies — Terai Fire, Green King', 'Gourds — Bottle Gourd, Bitter Gourd'], color: 'growth-green' },
@@ -29,6 +30,7 @@ export default function AgroSeed() {
         breadcrumbs={[{ href: '#/', label: 'Home' }, { href: '#/companies', label: 'Companies' }, { label: 'Agro Seed' }]}
         title="East West Agro Seed"
         subtitle="High-yield, quality-tested seed varieties bred for Nepal's diverse agro-climatic conditions."
+        logo={seedLogo}
       />
 
       {/* R&D Lab Section */}

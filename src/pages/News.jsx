@@ -92,7 +92,7 @@ export default function News() {
               <Reveal key={n.id} delay={i * 0.06}>
                 <div 
                   onClick={() => setSelectedNews(n)}
-                  className="bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer flex flex-col h-full"
+                  className="bg-white rounded-[2rem] overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-gray-50 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500 group cursor-pointer flex flex-col h-full"
                 >
                   <div className="h-48 overflow-hidden">
                     <img src={n.img} alt={n.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
@@ -141,11 +141,11 @@ export default function News() {
       {/* News Details Modal */}
       {selectedNews && (
         <div 
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[1000] flex items-center justify-center p-4 md:p-6 opacity-100 transition-opacity" 
+          className="fixed inset-0 bg-charcoal/40 backdrop-blur-md z-[1000] flex items-center justify-center p-4 md:p-6 opacity-100 transition-all duration-500" 
           onClick={() => setSelectedNews(null)}
         >
           <div 
-            className="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-2xl animate-fade-in-up" 
+            className="bg-white rounded-[2.5rem] max-w-3xl w-full max-h-[90vh] overflow-y-auto relative shadow-[0_20px_60px_rgb(0,0,0,0.2)] animate-fade-in-up" 
             onClick={e => e.stopPropagation()}
           >
             {/* Close Button */}

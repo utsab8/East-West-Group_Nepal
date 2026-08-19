@@ -17,10 +17,10 @@ export default function Navbar() {
   }, [location.pathname])
 
   return (
-    <nav className={`fixed top-0 w-full z-[100] transition-all duration-300 ${
+    <nav className={`fixed top-0 w-full z-[100] transition-all duration-500 ease-out ${
       scrolled 
-        ? 'bg-white/80 backdrop-blur-lg border-b border-white/20 shadow-[0_4px_30px_rgba(0,0,0,0.05)] py-3' 
-        : 'bg-white/50 backdrop-blur-sm border-b border-transparent py-4'
+        ? 'bg-white/70 backdrop-blur-xl border-b border-white/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] py-3' 
+        : 'bg-white/40 backdrop-blur-md border-b border-transparent py-5'
     }`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <Link to="/" className="flex items-center gap-2 group">
@@ -34,12 +34,12 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center gap-8">
-          <Link to="/" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">Home</Link>
-          <Link to="/about" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">About</Link>
+        <div className="hidden lg:flex items-center gap-8">
+          <Link to="/" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-all duration-300 hover:-translate-y-0.5">Home</Link>
+          <Link to="/about" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-all duration-300 hover:-translate-y-0.5">About</Link>
           
           <div className="relative group cursor-pointer py-4">
-            <span className="text-sm font-semibold text-charcoal group-hover:text-growth-green transition-colors flex items-center gap-1">
+            <span className="text-sm font-semibold text-charcoal group-hover:text-growth-green transition-all duration-300 hover:-translate-y-0.5 flex items-center gap-1">
               Companies <i className="fa-solid fa-chevron-down text-[10px]" />
             </span>
             <div className="absolute top-[100%] left-1/2 -translate-x-1/2 w-64 bg-white/90 backdrop-blur-xl border border-white/50 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-2 transform origin-top scale-95 group-hover:scale-100">
@@ -55,24 +55,49 @@ export default function Navbar() {
             </div>
           </div>
 
-          <Link to="/products" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">Products</Link>
-          <Link to="/solutions" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">Solutions</Link>
-          <Link to="/news-activities" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">News</Link>
-          <Link to="/gallery" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-colors">Gallery</Link>
+          <Link to="/products" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-all duration-300 hover:-translate-y-0.5">Products</Link>
+          <Link to="/solutions" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-all duration-300 hover:-translate-y-0.5">Solutions</Link>
+          <Link to="/news-activities" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-all duration-300 hover:-translate-y-0.5">News</Link>
+          <Link to="/gallery" className="text-sm font-semibold text-charcoal hover:text-growth-green transition-all duration-300 hover:-translate-y-0.5">Gallery</Link>
           
-          <Link to="/contact" className="ml-4 px-6 py-2.5 bg-gradient-to-r from-harvest to-harvest-hover text-charcoal font-bold text-sm rounded-full shadow-[0_4px_20px_rgba(234,179,8,0.3)] hover:shadow-[0_4px_25px_rgba(234,179,8,0.4)] hover:-translate-y-0.5 transition-all">
+          <Link to="/contact" className="ml-4 px-6 py-2.5 bg-gradient-to-r from-harvest to-harvest-hover text-white font-bold text-sm rounded-full shadow-[0_8px_20px_rgba(245,158,11,0.3)] hover:shadow-[0_12px_25px_rgba(245,158,11,0.4)] hover:-translate-y-1 transition-all duration-300">
             <i className="fa-solid fa-handshake mr-1.5" /> Dealer Portal
           </Link>
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden w-10 h-10 flex items-center justify-center text-deep-green text-xl bg-white/50 backdrop-blur-md rounded-full shadow-sm" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          <i className={`fa-solid ${mobileMenuOpen ? 'fa-xmark' : 'fa-bars'}`} />
+        <button 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          className="lg:hidden"
+          style={{
+            position: 'fixed',
+            top: '20px',
+            right: '24px',
+            width: '48px',
+            height: '48px',
+            backgroundColor: '#ffffff',
+            border: '2px solid #e5e7eb',
+            borderRadius: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 99999,
+            cursor: 'pointer',
+            boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
+          }}
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0A361A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            {mobileMenuOpen ? (
+              <path d="M18 6L6 18M6 6l12 12" />
+            ) : (
+              <path d="M4 6h16M4 12h16M4 18h16" />
+            )}
+          </svg>
         </button>
       </div>
 
       {/* Mobile Menu */}
-      <div className={`md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-white/50 shadow-xl transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-[500px] border-t border-gray-100' : 'max-h-0'}`}>
+      <div className={`lg:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-white/50 shadow-xl transition-all duration-300 overflow-hidden ${mobileMenuOpen ? 'max-h-[500px] border-t border-gray-100' : 'max-h-0'}`}>
         <div className="flex flex-col p-6 gap-4">
           <Link to="/" className="text-base font-bold text-deep-green">Home</Link>
           <Link to="/about" className="text-base font-bold text-deep-green">About Us</Link>

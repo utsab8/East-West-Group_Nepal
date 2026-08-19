@@ -70,21 +70,17 @@ export default function About() {
           <div className="grid md:grid-cols-3 gap-8">
             {leaders.map((leader, i) => (
               <Reveal key={i} delay={i * 0.15}>
-                <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group">
-                  <div className="relative h-72 overflow-hidden">
-                    <img src={leader.img} alt={leader.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                      <div className="flex gap-3">
-                        <button className="w-8 h-8 rounded-full bg-white/20 backdrop-blur text-white flex items-center justify-center hover:bg-growth-green transition-colors"><i className="fa-brands fa-linkedin-in text-sm" /></button>
-                        <button className="w-8 h-8 rounded-full bg-white/20 backdrop-blur text-white flex items-center justify-center hover:bg-growth-green transition-colors"><i className="fa-regular fa-envelope text-sm" /></button>
-                      </div>
+                <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group text-center flex flex-col items-center">
+                  <div className="relative w-36 h-36 mb-6 rounded-full overflow-hidden shadow-md border-4 border-meadow group-hover:border-growth-green transition-colors duration-500">
+                    <img src={leader.img} alt={leader.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                      <button className="w-8 h-8 rounded-full bg-white/30 backdrop-blur text-white flex items-center justify-center hover:bg-growth-green hover:text-white transition-all"><i className="fa-brands fa-linkedin-in text-sm" /></button>
+                      <button className="w-8 h-8 rounded-full bg-white/30 backdrop-blur text-white flex items-center justify-center hover:bg-growth-green hover:text-white transition-all"><i className="fa-regular fa-envelope text-sm" /></button>
                     </div>
                   </div>
-                  <div className="p-8 text-center">
-                    <h4 className="font-display font-bold text-2xl text-deep-green mb-1">{leader.name}</h4>
-                    <span className="text-xs font-bold uppercase tracking-widest text-growth-green mb-4 block">{leader.role}</span>
-                    <p className="text-sm text-gray-500 leading-relaxed">{leader.desc}</p>
-                  </div>
+                  <h4 className="font-display font-bold text-xl text-deep-green mb-1">{leader.name}</h4>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-growth-green mb-4 block">{leader.role}</span>
+                  <p className="text-sm text-gray-500 leading-relaxed max-w-[16rem]">{leader.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -93,7 +89,7 @@ export default function About() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-deep-green text-center">
+      <section className="py-20 bg-growth-green text-center">
         <div className="max-w-3xl mx-auto px-6">
           <Reveal>
             <h2 className="font-display font-black text-4xl text-white mb-6">Join Our Growing Network</h2>

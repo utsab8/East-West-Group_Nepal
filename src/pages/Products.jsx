@@ -40,7 +40,7 @@ export default function Products() {
         subtitle="Browse our complete range of quality seeds, crop protection chemicals, fertilizers, and growth promoters."
       />
 
-      <section className="py-24 bg-white relative">
+      <section className="py-24 bg-white relative overflow-hidden">
         <div className="absolute -top-32 -right-32 w-96 h-96 bg-growth-green/5 rounded-full blur-3xl pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           {/* Filter Bar */}
@@ -50,10 +50,10 @@ export default function Products() {
                 <button
                   key={f.key}
                   onClick={() => setActive(f.key)}
-                  className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 border backdrop-blur-sm ${
+                  className={`px-6 py-2.5 rounded-full text-sm font-semibold transition-all duration-500 border backdrop-blur-sm ${
                     active === f.key
-                      ? 'bg-growth-green text-white border-growth-green shadow-[0_0_20px_rgba(22,163,74,0.3)] scale-105'
-                      : 'bg-white/80 text-gray-600 border-gray-200 hover:border-growth-green hover:text-growth-green'
+                      ? 'bg-growth-green text-white border-growth-green shadow-[0_8px_20px_rgba(16,185,129,0.3)] scale-105'
+                      : 'bg-white/80 text-gray-600 border-gray-100 hover:border-growth-green/50 hover:text-growth-green hover:shadow-sm'
                   }`}
                 >
                   {f.label}
@@ -70,7 +70,7 @@ export default function Products() {
             {filtered.map((p, i) => (
               <Reveal key={p.id} delay={i * 0.05}>
                 <div 
-                  className="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 group cursor-pointer" 
+                  className="bg-white rounded-[2rem] border border-gray-50 overflow-hidden shadow-[0_4px_20px_rgb(0,0,0,0.02)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] hover:-translate-y-2 transition-all duration-500 group cursor-pointer" 
                   onClick={() => setModal(p)}
                 >
                   <div className="relative overflow-hidden aspect-square bg-gray-50 border-b border-gray-100">
@@ -98,8 +98,8 @@ export default function Products() {
 
       {/* Modal */}
       {modal && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-md z-[1000] flex items-center justify-center p-6" onClick={() => setModal(null)}>
-          <div className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row relative shadow-2xl animate-fade-in-up" onClick={e => e.stopPropagation()}>
+        <div className="fixed inset-0 bg-charcoal/40 backdrop-blur-md z-[1000] flex items-center justify-center p-6 transition-all duration-500" onClick={() => setModal(null)}>
+          <div className="bg-white rounded-[2.5rem] max-w-4xl w-full max-h-[90vh] overflow-hidden flex flex-col md:flex-row relative shadow-[0_20px_60px_rgb(0,0,0,0.2)] animate-fade-in-up" onClick={e => e.stopPropagation()}>
             <button onClick={() => setModal(null)} className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/80 backdrop-blur text-charcoal border border-gray-200 z-50 flex items-center justify-center hover:bg-gray-100 transition-colors shadow-sm">
               <i className="fa-solid fa-xmark text-lg" />
             </button>
