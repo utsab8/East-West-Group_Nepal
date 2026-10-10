@@ -1,7 +1,100 @@
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { Reveal, SectionHeader, PageHero } from '../components/Shared'
 import SEO from '../components/SEO'
 import seedLogo from '../seed.jpeg'
+
+const seedTestimonials = [
+  {
+    id: 1,
+    headline: '"The EW Srijana hybrid completely transformed my tomato harvest."',
+    quote: 'I used to struggle with early blight wiping out half my crop during the monsoon. Since switching to East West\'s Srijana hybrid seeds, my plants are healthier, the fruits are uniform, and my overall yield has increased by 40%. The agronomist support from my local dealer made all the difference.',
+    farmer: 'Ram Bahadur Thapa',
+    location: 'Commercial Vegetable Farmer, Kavre District',
+    img: '/images/farmer-success.jpg'
+  },
+  {
+    id: 2,
+    headline: '"Consistent quality year after year."',
+    quote: 'I have been planting EW Gold maize for the last five years. The germination rate is always perfect, and the cobs are large and full. It has given me financial stability to send my children to a better school.',
+    farmer: 'Gita Poudel',
+    location: 'Maize Farmer, Chitwan',
+    img: 'https://images.unsplash.com/photo-1595841696677-6489ff3f8cd1?q=80&w=800&auto=format&fit=crop'
+  }
+];
+
+function TestimonialSlider({ testimonials }) {
+  const [current, setCurrent] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
+
+  const t = testimonials[current];
+
+  return (
+    <section className="py-24 bg-deep-green text-white relative overflow-hidden">
+      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_var(--color-growth-green)_0%,_transparent_50%)]" />
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <Reveal>
+            <span className="text-xs font-bold uppercase tracking-wider text-harvest mb-3 block">Farmer Success Story</span>
+            
+            <div className="min-h-[200px]">
+              <h2 className="font-display text-4xl font-bold mb-8 leading-snug animate-fade-in-up" key={`h-${t.id}`}>
+                {t.headline}
+              </h2>
+              <div className="flex gap-4 mb-8 animate-fade-in-up" style={{ animationDelay: '100ms' }} key={`q-${t.id}`}>
+                <i className="fa-solid fa-quote-left text-4xl text-growth-green/40" />
+                <p className="text-white/80 leading-relaxed text-lg italic">
+                  {t.quote}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between animate-fade-in-up" style={{ animationDelay: '200ms' }} key={`f-${t.id}`}>
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-harvest/20 flex items-center justify-center border border-harvest/30">
+                  <i className="fa-solid fa-user text-harvest" />
+                </div>
+                <div>
+                  <h6 className="font-bold">{t.farmer}</h6>
+                  <p className="text-xs text-white/60">{t.location}</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-2">
+                {testimonials.map((_, idx) => (
+                  <button 
+                    key={idx} 
+                    onClick={() => setCurrent(idx)}
+                    className={`w-3 h-3 rounded-full transition-colors ${current === idx ? 'bg-growth-green' : 'bg-white/20'}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.2}>
+            <div className="rounded-lg overflow-hidden border-[6px] border-white/10 shadow-2xl relative h-[400px]">
+              {testimonials.map((imgT, idx) => (
+                <img 
+                  key={imgT.id}
+                  src={imgT.img || '/images/farmer-success.jpg'} 
+                  alt={imgT.farmer} 
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${current === idx ? 'opacity-100' : 'opacity-0'}`} 
+                />
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 const categories = [
   { icon: 'fa-pepper-hot', title: 'Hybrid Vegetable Seeds', items: ['Cabbage — Green Emperor, Snow Ball', 'Cauliflower — Snow White, Early Queen', 'Tomato — Srijana, Manisha', 'Chillies — Terai Fire, Green King', 'Gourds — Bottle Gourd, Bitter Gourd'], color: 'growth-green' },
@@ -39,9 +132,9 @@ export default function AgroSeed() {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <Reveal>
               <div className="relative">
-                <div className="absolute -top-6 -left-6 w-32 h-32 bg-growth-green/10 rounded-full blur-xl" />
-                <img src="/images/seed-lab.jpg" alt="Seed germination testing in laboratory" className="rounded-2xl shadow-2xl relative z-10 border-4 border-white" />
-                <div className="absolute -bottom-6 -right-6 bg-white p-5 rounded-2xl shadow-xl z-20 max-w-[200px]">
+                
+                <img src="/images/seed-lab.jpg" alt="Seed germination testing in laboratory" className="rounded-lg shadow-2xl relative z-10 border-4 border-white" />
+                <div className="absolute -bottom-6 -right-6 bg-white p-5 rounded-lg shadow-xl z-20 max-w-[200px]">
                   <div className="flex items-center gap-3 mb-2">
                     <i className="fa-solid fa-microscope text-growth-green text-2xl" />
                     <span className="font-display font-black text-2xl text-deep-green">ISO</span>
@@ -80,7 +173,7 @@ export default function AgroSeed() {
           <div className="grid md:grid-cols-3 gap-8">
             {categories.map((c, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className={`bg-white rounded-2xl p-8 shadow-md border-t-4 border-${c.color} hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
+                <div className={`bg-white rounded-lg p-8 shadow-md border-t-4 border-${c.color} hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
                   <i className={`fa-solid ${c.icon} text-${c.color} text-3xl mb-4 block`} />
                   <h4 className="font-display font-bold text-lg text-deep-green mb-4">{c.title}</h4>
                   <ul className="space-y-2">
@@ -114,38 +207,7 @@ export default function AgroSeed() {
         </div>
       </section>
 
-      {/* Farmer Success Story */}
-      <section className="py-24 bg-deep-green text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_var(--color-growth-green)_0%,_transparent_50%)]" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <Reveal>
-              <span className="text-xs font-bold uppercase tracking-wider text-harvest mb-3 block">Farmer Success Story</span>
-              <h2 className="font-display text-4xl font-bold mb-8 leading-snug">"The EW Srijana hybrid completely transformed my tomato harvest."</h2>
-              <div className="flex gap-4 mb-8">
-                <i className="fa-solid fa-quote-left text-4xl text-growth-green/40" />
-                <p className="text-white/80 leading-relaxed text-lg italic">
-                  I used to struggle with early blight wiping out half my crop during the monsoon. Since switching to East West's Srijana hybrid seeds, my plants are healthier, the fruits are uniform, and my overall yield has increased by 40%. The agronomist support from my local dealer made all the difference.
-                </p>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-harvest/20 flex items-center justify-center border border-harvest/30">
-                  <i className="fa-solid fa-user text-harvest" />
-                </div>
-                <div>
-                  <h6 className="font-bold">Ram Bahadur Thapa</h6>
-                  <p className="text-xs text-white/60">Commercial Vegetable Farmer, Kavre District</p>
-                </div>
-              </div>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <div className="rounded-2xl overflow-hidden border-[6px] border-white/10 shadow-2xl">
-                <img src="/images/farmer-success.jpg" alt="Happy farmer with a basket of fresh tomatoes" className="w-full h-auto" />
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <TestimonialSlider testimonials={seedTestimonials} />
 
       {/* Field Deployment */}
       <section className="py-24 bg-white">
@@ -153,7 +215,7 @@ export default function AgroSeed() {
           <Reveal><SectionHeader overline="In the Field" title="Localized Planting Calendars" subtitle="Tailored agronomic guidance for Nepal's distinct ecological zones." /></Reveal>
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
             <Reveal>
-              <div className="rounded-2xl overflow-hidden shadow-xl">
+              <div className="rounded-lg overflow-hidden shadow-xl">
                 <img src="/images/field-demo.jpg" alt="Agricultural field demonstration day with farmers" className="w-full h-auto" />
               </div>
             </Reveal>
@@ -182,7 +244,7 @@ export default function AgroSeed() {
           <Reveal>
             <h2 className="font-display text-4xl font-bold text-deep-green mb-4">Explore Our Seed Catalogue</h2>
             <p className="text-lg text-gray-500 mb-8">Browse our complete range of hybrid and open-pollinated seed varieties.</p>
-            <Link to="/products" className="px-8 py-3.5 bg-harvest text-charcoal font-semibold rounded-xl shadow-lg shadow-harvest/30 hover:bg-harvest-hover hover:-translate-y-0.5 transition-all">
+            <Link to="/products" className="px-8 py-3.5 bg-harvest text-charcoal font-semibold rounded-md shadow-lg shadow-harvest/30 hover:bg-harvest-hover hover:-translate-y-0.5 transition-all">
               <i className="fa-solid fa-boxes-stacked mr-2" />View All Products
             </Link>
           </Reveal>

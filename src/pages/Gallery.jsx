@@ -1,24 +1,13 @@
 import { useState } from 'react'
 import { Reveal, SectionHeader, PageHero } from '../components/Shared'
 import SEO from '../components/SEO'
-
-const galleryItems = [
-  { id: 1, type: 'warehouse', title: 'Central Warehouse — Balaju', img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2833?q=80&w=800' },
-  { id: 2, type: 'field', title: 'Tomato Trial Plot — Kavre', img: 'https://images.unsplash.com/photo-1592841200221-a6898f307baa?q=80&w=800' },
-  { id: 3, type: 'lab', title: 'Seed Germination Lab', img: 'https://images.unsplash.com/photo-1581093450021-4a7360e9a6b5?q=80&w=800' },
-  { id: 4, type: 'team', title: 'Field Team Advisory', img: 'https://images.unsplash.com/photo-1605000797499-95a51c5269ae?q=80&w=800' },
-  { id: 5, type: 'warehouse', title: 'Regional Hub — Butwal', img: 'https://images.unsplash.com/photo-1587293852726-70cdb56c2833?q=80&w=800' },
-  { id: 6, type: 'field', title: 'Maize Demo Plot — Chitwan', img: 'https://images.unsplash.com/photo-1595841696677-6489ffa3e5af?q=80&w=800' },
-  { id: 7, type: 'lab', title: 'Chemical QC Laboratory', img: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=800' },
-  { id: 8, type: 'team', title: 'Dealer Training Session', img: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=800' },
-  { id: 9, type: 'field', title: 'Paddy Harvest', img: 'https://images.unsplash.com/photo-1584282806653-565d70f1a196?q=80&w=800' },
-  { id: 10, type: 'warehouse', title: 'Cold Storage Unit', img: 'https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=800' },
-]
+import { useGallery } from '../context/GalleryContext'
 
 const filters = ['all', 'warehouse', 'field', 'lab', 'team']
 const labels = { all: 'All Photos', warehouse: 'Infrastructure', field: 'Field Trials', lab: 'R&D Labs', team: 'Our People' }
 
 export default function Gallery() {
+  const { galleryItems } = useGallery();
   const [activeFilter, setActiveFilter] = useState('all')
   const [lightboxImg, setLightboxImg] = useState(null)
 
@@ -59,7 +48,7 @@ export default function Gallery() {
             {filtered.map((item, i) => (
               <Reveal key={item.id} delay={i * 0.05}>
                 <div 
-                  className="break-inside-avoid relative rounded-2xl overflow-hidden group cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100"
+                  className="break-inside-avoid relative rounded-lg overflow-hidden group cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500 border border-gray-100"
                   onClick={() => setLightboxImg(item)}
                 >
                   <img 
@@ -74,7 +63,7 @@ export default function Gallery() {
                   </div>
                   
                   {/* Zoom Icon overlay */}
-                  <div className="absolute top-4 right-4 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:rotate-12">
+                  <div className="absolute top-4 right-4 w-10 h-10 bg-white/20  rounded-full flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:rotate-12">
                     <i className="fa-solid fa-expand" />
                   </div>
                 </div>
@@ -93,7 +82,7 @@ export default function Gallery() {
       {/* Lightbox Modal */}
       {lightboxImg && (
         <div 
-          className="fixed inset-0 bg-black/95 backdrop-blur-xl z-[1000] flex items-center justify-center p-4 animate-fade-in-up" 
+          className="fixed inset-0 bg-black/95  z-[1000] flex items-center justify-center p-4 animate-fade-in-up" 
           onClick={() => setLightboxImg(null)}
         >
           <button 

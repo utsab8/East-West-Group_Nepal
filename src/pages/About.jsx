@@ -29,7 +29,7 @@ export default function About() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
           <Reveal>
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white">
+            <div className="relative rounded-lg overflow-hidden shadow-2xl border border-white">
               <img src="/images/hero.jpg" alt="Company history" className="w-full h-full object-cover" />
             </div>
           </Reveal>
@@ -51,8 +51,8 @@ export default function About() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((v, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-xl transition-shadow text-center">
-                  <div className="w-16 h-16 mx-auto bg-growth-green/10 text-growth-green rounded-2xl flex items-center justify-center text-2xl mb-6"><i className={`fa-solid ${v.icon}`} /></div>
+                <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-xl transition-shadow text-center">
+                  <div className="w-16 h-16 mx-auto bg-growth-green/10 text-growth-green rounded-lg flex items-center justify-center text-2xl mb-6"><i className={`fa-solid ${v.icon}`} /></div>
                   <h4 className="font-display font-bold text-xl text-deep-green mb-3">{v.title}</h4>
                   <p className="text-gray-500 text-sm leading-relaxed">{v.desc}</p>
                 </div>
@@ -70,12 +70,12 @@ export default function About() {
           <div className="grid md:grid-cols-3 gap-8">
             {leaders.map((leader, i) => (
               <Reveal key={i} delay={i * 0.15}>
-                <div className="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group text-center flex flex-col items-center">
+                <div className="bg-white rounded-lg p-8 shadow-sm border border-gray-100 hover:shadow-xl transition-all duration-300 group text-center flex flex-col items-center">
                   <div className="relative w-36 h-36 mb-6 rounded-full overflow-hidden shadow-md border-4 border-meadow group-hover:border-growth-green transition-colors duration-500">
                     <img src={leader.img} alt={leader.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
                     <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                      <button className="w-8 h-8 rounded-full bg-white/30 backdrop-blur text-white flex items-center justify-center hover:bg-growth-green hover:text-white transition-all"><i className="fa-brands fa-linkedin-in text-sm" /></button>
-                      <button className="w-8 h-8 rounded-full bg-white/30 backdrop-blur text-white flex items-center justify-center hover:bg-growth-green hover:text-white transition-all"><i className="fa-regular fa-envelope text-sm" /></button>
+                      <button className="w-8 h-8 rounded-full bg-white/30  text-white flex items-center justify-center hover:bg-growth-green hover:text-white transition-all"><i className="fa-brands fa-linkedin-in text-sm" /></button>
+                      <button className="w-8 h-8 rounded-full bg-white/30  text-white flex items-center justify-center hover:bg-growth-green hover:text-white transition-all"><i className="fa-regular fa-envelope text-sm" /></button>
                     </div>
                   </div>
                   <h4 className="font-display font-bold text-xl text-deep-green mb-1">{leader.name}</h4>
@@ -88,18 +88,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-growth-green text-center">
-        <div className="max-w-3xl mx-auto px-6">
-          <Reveal>
-            <h2 className="font-display font-black text-4xl text-white mb-6">Join Our Growing Network</h2>
-            <p className="text-white/80 text-lg mb-8">We are always looking for passionate dealers to partner with us in transforming Nepal's agriculture.</p>
-            <Link to="/contact" className="px-8 py-4 bg-harvest text-charcoal font-bold rounded-xl hover:-translate-y-1 transition-transform inline-block">
-              Become a Dealer
-            </Link>
-          </Reveal>
-        </div>
-      </section>
     </>
   )
 }

@@ -31,7 +31,7 @@ const modules = [
 
 function TimelineCard({ icon, iconBg, title, badge, badgeColor, steps }) {
   return (
-    <div className="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-shadow">
+    <div className="bg-white rounded-lg p-8 shadow-md hover:shadow-xl transition-shadow">
       <div className="flex items-center gap-3 mb-6">
         <div className={`w-12 h-12 rounded-full ${iconBg} flex items-center justify-center text-white text-xl`}>
           <i className={`fa-solid ${icon}`} />
@@ -89,8 +89,8 @@ export default function Solutions() {
           <div className="grid md:grid-cols-3 gap-8">
             {clinics.map((c, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className="bg-white rounded-2xl p-8 text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                  <div className={`w-14 h-14 rounded-xl bg-${c.color}/10 mx-auto mb-5 flex items-center justify-center`}>
+                <div className="bg-white rounded-lg p-8 text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <div className={`w-14 h-14 rounded-md bg-${c.color}/10 mx-auto mb-5 flex items-center justify-center`}>
                     <i className={`fa-solid ${c.icon} text-${c.color} text-2xl`} />
                   </div>
                   <h5 className="font-display font-bold text-deep-green mb-2">{c.title}</h5>
@@ -109,7 +109,7 @@ export default function Solutions() {
           <div className="grid md:grid-cols-3 gap-8">
             {modules.map((m, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <div className={`bg-white rounded-2xl p-8 shadow-md border-t-4 ${m.accent} hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
+                <div className={`bg-white rounded-lg p-8 shadow-md border-t-4 ${m.accent} hover:shadow-xl hover:-translate-y-1 transition-all duration-300`}>
                   <span className={`text-xs font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full ${m.badge} mb-3 inline-block`}>Module {i + 1}</span>
                   <h5 className="font-display font-bold text-deep-green mb-3">{m.title}</h5>
                   <p className="text-sm text-gray-500">{m.desc}</p>
